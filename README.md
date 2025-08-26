@@ -36,14 +36,10 @@ git clone https://github.com/your-username/chatgpt-writing-assistant.git
 
 To use the extension, you'll need your own OpenAI API key. Follow these steps:
 
-1. Open the \`background.js\` file in the extension folder.
-2. Find the following line in the code:
-
-   \`\`\`javascript
-   const apiKey = 'YOUR_API_KEY_HERE';  // Replace with your actual OpenAI API key
-   \`\`\`
-
-3. Replace \`'YOUR_API_KEY_HERE'\` with your actual OpenAI API key. You can obtain this key by signing up at [OpenAI](https://platform.openai.com).
+1. Click on the ChatGPT Writing Assistant icon in your Chrome toolbar to open the settings popup.
+2. Enter your OpenAI API key in the designated input field.
+3. Click "Save Key". Your API key will be securely stored.
+4. You can obtain an API key by signing up at [OpenAI](https://platform.openai.com).
 
 ### Step 5: Use the Extension
 

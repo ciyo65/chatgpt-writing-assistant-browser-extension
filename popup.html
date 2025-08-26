@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ChatGPT Writing Assistant</title>
+    <title>ChatGPT Writing Assistant Settings</title>
     <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-    <h1>ChatGPT Writing Assistant</h1>
-    <div id="settings">
-        <label>
-            <input type="checkbox" id="grammarCheck" checked> Enable Grammar Check
-        </label><br>
-        <label>
-            <input type="checkbox" id="styleCheck" checked> Enable Style Suggestions
-        </label>
+    <div class="container">
+        <h1>Settings</h1>
+        <p>Enter your OpenAI API key to get started.</p>
+
+        <div class="input-group">
+            <label for="apiKey">OpenAI API Key</label>
+            <input type="password" id="apiKey" placeholder="Enter your API key">
+        </div>
+
+        <button id="saveSettings">Save Key</button>
+
+        <div id="status-message"></div>
     </div>
-    <button id="saveSettings">Save Settings</button>
     <script src="popup.js"></script>
 </body>
 </html>
