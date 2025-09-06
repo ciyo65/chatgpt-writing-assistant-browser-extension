@@ -53,7 +53,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 async function getSuggestionsFromAPI(text, style) {
-    const apiKey = 'Replace with your actual API key'; // Replace with your actual API key
+    const data = await chrome.storage.sync.get('apiKey');
+    const apiKey = data.apiKey;
+
+    if (!apiKey) {
+        throw new Error('API key not found. Please set it in the extension options.');
+    }
+
     const stylePrompt = `Convert the following text to a ${style.toLowerCase()} writing style: "${text}"`;
 
     try {
@@ -64,7 +70,7 @@ async function getSuggestionsFromAPI(text, style) {
                 'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: 'gpt-4',  // Use the model you have access to, like 'gpt-3.5-turbo'
+                model: 'gpt-4',
                 messages: [{ role: 'user', content: stylePrompt }],
                 max_tokens: 100,
                 n: 1,
@@ -74,22 +80,22 @@ async function getSuggestionsFromAPI(text, style) {
         });
 
         if (!response.ok) {
-            const errorData = await response.json();  // Get detailed error info from API
+            const errorData = await response.json();
             console.error('API error response:', errorData);
             throw new Error(`API error: ${errorData.error.message || response.statusText}`);
         }
 
-        const data = await response.json();
-        console.log('API response data:', data);  // Debugging line
+        const responseData = await response.json();
+        console.log('API response data:', responseData);
 
-        if (data.choices && data.choices[0] && data.choices[0].message) {
-            return data.choices[0].message.content;
+        if (responseData.choices && responseData.choices[0] && responseData.choices[0].message) {
+            return responseData.choices[0].message.content;
         } else {
             throw new Error('Unexpected API response format');
         }
     } catch (error) {
         console.error('Error in getSuggestionsFromAPI:', error);
-        throw error;  // Re-throw the error to handle it in the calling function
+        throw error;
     }
 }
 
